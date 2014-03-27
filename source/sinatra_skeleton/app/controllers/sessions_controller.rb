@@ -7,7 +7,7 @@ end
 post '/sessions' do
   @user = User.find_by_name(params[:name])
   if @user.nil? || @user.authenticate(params[:password]) == false
-    @error = "something went wrong"
+    @error = "something went wrong - please try again"
     return erb :"/sessions/new"
   end
 
