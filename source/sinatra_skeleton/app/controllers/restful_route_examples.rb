@@ -1,23 +1,23 @@
 # RESTful Routes:
-# Cats (resource)
+# events (resource)
 #
 # READING
 # VERB URL             ACTION  DESC
-# GET /cats            index   show a list of cats
-# GET /cats/:id        show    show an individual cat
+# GET /events            index   show a list of events
+# GET /events/:id        show    show an individual event
 #
 # CREATING
-# GET /cats/new        new     show the form to create a new cat
-# POST /cats           create  create a new cat
+# GET /events/new        new     show the form to create a new event
+# POST /events           create  create a new event
 #
 # UPDATING
-# GET /cats/:id/edit   edit    show the form to edit an existing cat
-# PUT /cats/:id        update  change the properties of an existing cat
+# GET /events/:id/edit   edit    show the form to edit an existing event
+# PUT /events/:id        update  change the properties of an existing event
 #
 # DELETING
-# DELETE /cats/:id     delete  delete an existing cat
+# DELETE /events/:id     delete  delete an existing event
 #
-# /app/views/cats/new.erb
+# /app/views/events/new.erb
 #                  edit.erb
 #                  index.erb
 #                  show.erb
@@ -55,67 +55,67 @@
 #                  show.erb
 
 
-# List all cats (index)
-get "/cats" do
-  @cats = Cat.all
-  erb :"cats/index"
+# List all events (index)
+get "/events" do
+  @events = event.all
+  erb :"events/index"
 end
 
-# Show the form to create a new cat (new)
-get "/cats/new" do
-  erb :"cats/new"
+# Show the form to create a new event (new)
+get "/events/new" do
+  erb :"events/new"
 end
 
-# Show a single cat (show)
-get "/cats/:id" do
-  @cat = Cat.find(params[:id])
-  erb :"cats/show"
+# Show a single event (show)
+get "/events/:id" do
+  @event = event.find(params[:id])
+  erb :"events/show"
 end
 
-# Create a new cat (create)
-post "/cats" do
-  @cat = Cat.new(params)
-  if @cat.save
-    redirect to("/cats/#{@cat.id}")
+# Create a new event (create)
+post "/events" do
+  @event = event.new(params)
+  if @event.save
+    redirect to("/events/#{@event.id}")
   else
-    erb :"cats/new"
+    erb :"events/new"
   end
 end
 
-# Show the form to edit a cat (edit)
-get "/cats/:id/edit" do
-  @cat = Cat.find(params[:id])
-  erb :"cats/edit"
+# Show the form to edit a event (edit)
+get "/events/:id/edit" do
+  @event = event.find(params[:id])
+  erb :"events/edit"
 end
 
-# Update an existing cat (update)
-put "/cats/:id" do
-  @cat = cat.find(params[:id])
+# Update an existing event (update)
+put "/events/:id" do
+  @event = event.find(params[:id])
 
   # Dealing with _method:
   #
   # Option #1 Delete _method from params
-  # e.g. params = {"_method" => "put", "name" => "Booker T. Cat", "favorite_food" => "tuna"}
+  # e.g. params = {"_method" => "put", "name" => "Booker T. event", "favorite_food" => "tuna"}
   params.delete("_method")
-  if @cat.update(params)
-    redirect to("/cats/#{@cat.id}")
+  if @event.update(params)
+    redirect to("/events/#{@event.id}")
   else
-    erb :"cat/edit"
+    erb :"event/edit"
   end
 
-  # Option #2 Stuff/namespace all the cat attributes under a parent key 'cat'
+  # Option #2 Stuff/namespace all the event attributes under a parent key 'event'
   # e.g. params = {"_method" => "put",
-  #                "cat" => {"name" => "Booker T. Cat", "favorite_food" => "tuna"}}
-  if @cat.update(params[:cat])
-    redirect to("/cats/#{@cat.id}")
+  #                "event" => {"name" => "Booker T. event", "favorite_food" => "tuna"}}
+  if @event.update(params[:event])
+    redirect to("/events/#{@event.id}")
   else
-    erb "cat/edit"
+    erb "event/edit"
   end
 end
 
-# Delete an existing cat (delete)
-delete "/cats/:id" do
-  Cat.destroy(params[:id])
+# Delete an existing event (delete)
+delete "/events/:id" do
+  event.destroy(params[:id])
 
-  redirect to("/cats")
+  redirect to("/events")
 end
