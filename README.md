@@ -1,4 +1,9 @@
-# Sinatra Skeleton - Basic w/ User login
+# Practice Challenges
+
+## CSV Parsing Practice
+Contains a folder with practice challenges.
+
+## Sinatra Skeleton - Basic w/ User login
 
 Contains basic file structure for sinatra skeleton.  This skeleton/template is similar to the file structure found in Rails.
 
